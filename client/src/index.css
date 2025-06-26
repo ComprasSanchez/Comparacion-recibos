@@ -46,6 +46,22 @@ h1 {
   color: var(--secondary);
 }
 
+/* contenedor del filtro */
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* estilo del select */
+.filter-container select {
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  background: white;
+  cursor: pointer;
+}
 
 .handlesubmit {
   display: flex;
