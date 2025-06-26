@@ -2,8 +2,10 @@
   "name": "comparador-recibos",
   "version": "1.0.0",
   "main": "server.js",
+  "proxy": "http://localhost:3000",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "express": "^4.18.2",
