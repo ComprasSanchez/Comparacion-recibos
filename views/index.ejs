@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Comparador de Recibos</title>
+</head>
+
+<body>
+    <h1>Sube tu Excel y Recibos</h1>
+    <form action="/process" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Excel con datos:</label>
+            <input type="file" name="excel" accept=".xlsx" required />
+        </div>
+        <div>
+            <label>Recibos (PDFs):</label>
+            <input type="file" name="pdfs" accept=".pdf" multiple required />
+        </div>
+        <button type="submit">Procesar y Comparar</button>
+    </form>
+</body>
+
+</html>

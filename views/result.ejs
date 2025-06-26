@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Comparación</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Archivo PDF</th>
+                <th>DNI</th>
+                <th>Colaborador</th> <!-- nueva columna -->
+                <th>Neto PDF</th>
+                <th>Neto Excel</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% results.forEach(r=> { %>
+                <tr>
+                    <td>
+                        <%= r.file %>
+                    </td>
+                    <td>
+                        <%= r.dni %>
+                    </td>
+                    <td>
+                        <%= r.colaborador %>
+                    </td> <!-- mostramos nombre -->
+                    <td>
+                        <%= r.netoPdf %>
+                    </td>
+                    <td>
+                        <%= r.netoExcel %>
+                    </td>
+                    <td>
+                        <%= r.status %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+
+    </table>
+    <p><a href="/">↩️ Volver</a></p>
+</body>
+
+</html>
