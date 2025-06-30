@@ -82,7 +82,7 @@ app.post(
                         colaborador: '-',
                         netoPdf: '-',
                         netoExcel: '-',
-                        status: '❌ Error parseando PDF',
+                        status: '❌ Controlar Recibo',
                         errorMessage: e.message
                     });
                     continue;
@@ -99,10 +99,10 @@ app.post(
 
                 let status, netoExcel, colaborador;
                 if (!dni || isNaN(netoPdf)) {
-                    status = '❌ Dato PDF incompleto';
+                    status = '❌ Controlar Recibo';
                     colaborador = '-';
                 } else if (!mapaExcel.has(dni)) {
-                    status = '❌ DNI no encontrado en Excel';
+                    status = '❌ Controlar Recibo';
                     colaborador = '-';
                 } else {
                     const entry = mapaExcel.get(dni);
@@ -113,7 +113,7 @@ app.post(
                         ? '✅ Coincide'
                         : diff <= 100
                             ? '🟡 Coincide parcialmente'
-                            : '❌ No coincide';
+                            : '❌ Leído, NO coincide';
                 }
 
                 results.push({
