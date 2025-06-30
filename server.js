@@ -66,9 +66,29 @@ app.post(
             });
 
             // procesa cada PDF
+            // 2) Procesar cada PDF y comparar
             const results = [];
             for (const f of req.files.pdfs) {
-                const text = (await pdf(fs.readFileSync(f.path))).text;
+                let text;
+                try {
+                    const dataBuffer = fs.readFileSync(f.path);
+                    const data = await pdf(dataBuffer);
+                    text = data.text;
+                } catch (e) {
+                    // marca este PDF como fallido y continúa
+                    results.push({
+                        file: path.basename(f.originalname),
+                        dni: '-',
+                        colaborador: '-',
+                        netoPdf: '-',
+                        netoExcel: '-',
+                        status: '❌ Error parseando PDF',
+                        errorMessage: e.message
+                    });
+                    continue;
+                }
+
+                // si llegamos acá, el PDF se leyó OK:
                 const cuilm = text.match(/CUIL\s*[:\-]?\s*(\d{11})/);
                 const dni = cuilm ? cuilm[1].substr(2, 8) : null;
                 const netom = text.match(/Neto a Cobrar\s*:\s*\$\s*([\d\.,]+)/i);
@@ -99,7 +119,7 @@ app.post(
                 results.push({
                     file: path.basename(f.originalname),
                     dni: dni || '-',
-                    colaborador: colaborador || '-',
+                    colaborador,
                     netoPdf: isNaN(netoPdf) ? '-' : netoPdf.toFixed(2),
                     netoExcel: netoExcel != null ? netoExcel.toFixed(2) : '-',
                     status
